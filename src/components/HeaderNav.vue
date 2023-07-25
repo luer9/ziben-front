@@ -12,19 +12,19 @@
       
   
    
-  <el-menu-item index="1" > 
+  <el-menu-item index="/vagueTerm" > 
       <router-link to="/vagueTerm"> <strong>术语模糊搜索</strong> </router-link>
       </el-menu-item>
-   <el-menu-item index="2">
+   <el-menu-item index="/graphViewPage">
       <router-link to="/graphViewPage"><strong>高频词知识图谱</strong> </router-link>
     </el-menu-item>
-          <el-menu-item index="3" > 
+          <el-menu-item index="/allTerm" > 
       <router-link to="/allTerm"> <strong>术语列表</strong> </router-link>
     </el-menu-item>
-  <el-menu-item index="4">
+  <el-menu-item index="/introduction">
         <router-link to="/introduction"> <strong> 项目简介 </strong> </router-link>
       </el-menu-item>
-  <el-menu-item index="5">
+  <el-menu-item index="/">
        <router-link to="/">  <strong>主页 </strong></router-link>
     </el-menu-item>
    
@@ -71,13 +71,40 @@
   </el-menu>
   </el-affix>
 </template>
-<script lang="ts" setup>
+<script lang="ts">
 import {User} from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
-const activeIndex = ref('5')
-const handleSelect = (key: string, keyPath: string[]) => {
-  // console.log(key, keyPath)
+// const activeIndex = ref('5')
+// const handleSelect = (key: string, keyPath: string[]) => {
+//   // console.log(key, keyPath)
+// }
+export default {
+  name: "Nav",
+  data() {
+    return {
+      activeIndex: "/"
+    }
+  },
+  // computed: {
+  //   acticeIndex: function() {
+  //     return this.$route.path;
+  //   }
+  // },
+  created() {
+    
+  },
+  watch:{
+    $route() {
+      // console.log(">>>" + this.$route.path)
+      this.handleSelect(this.$route.path);
+    },
+  },
+  methods: {
+    handleSelect(keyPath) {
+      this.activeIndex = keyPath
+    }
+  }
 }
 </script>
 

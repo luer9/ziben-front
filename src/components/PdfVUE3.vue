@@ -104,6 +104,7 @@ export default {
   top: 100px;
   position: fixed;
   z-index: 999;
+  left: 10px;
 }
 #container .vue-pdf-embed:not(:first-child) {
   /* border: 1px solid transparent; */

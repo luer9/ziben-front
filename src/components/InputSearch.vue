@@ -49,35 +49,79 @@
 import {Search} from '@element-plus/icons-vue'
 import {ref} from 'vue'
 import { useRouter } from 'vue-router'
-
+import {getCurrentInstance } from 'vue'
 export default {
-  
-  setup() {
-    const input3 = ref("")
-    const select = ref("")
-
-    const _router = useRouter();
-    const go = () => {
-      if(input3.value != '') {
-        _router.push({
-            name: "infor",
-            params: {
-              content: input3.value,
-              // type: select.value
-            }
-        })  
+  data() {
+      return {
+          tableData: [],
+          input3: ''
       }
-    }
-    return {
-      input3,
-      select,
-      go
-    }
+  },
+  created() {
+
+        let url = '/api/term/getAllTermName';
+        this.$ajax.get(url, {
+                params: {
+                   
+                }
+            })
+            .then(response => {
+                var list = []
+                for(var i in response.data) {
+                  list.push(response.data[i])
+                }
+                this.tableData = list
+            })
+            .catch(err => console.log("[error]" + err));
+    
+  },
+  setup() {
+ 
+    // const input3 = ref("")
+    // const select = ref("")
+    // const _router = useRouter();
+    // const go = () => {
+    //   if(input3.value != '') {
+    //     _router.push({
+    //         name: "infor",
+    //         params: {
+    //           content: input3.value,
+    //           // type: select.value
+    //         }
+    //     })  
+    //   }
+    // }
+    // return {
+    //   input3,
+    //   select,
+    //   go
+    // }
   },
   methods: {
-    test() {
-      this.go();
+    go() {
+      // console.log(this.input3 + " " + this.tableData.indexOf(this.input3))
+      if(this.input3 != '' && this.tableData.indexOf(this.input3)!=-1) {
+        this.$router.push(
+        { name: "infor", params: { content: this.input3}}
+        )
+      }else if(this.input3 != '' && this.tableData.indexOf(this.input3) ==-1) {
+        this.$router.push(
+        { name: "vagueTerm", params: { content: this.input3}}
+        )
+      }
+      // if(this.input3.value != '') {
+        // _router.push({
+        //     name: "infor",
+        //     params: {
+        //       content: this.input3.value,
+        //       // type: select.value
+        //     }
+        // })  
+      // }
     }
+    // test() {
+    //   this.go();
+    // }
   }
   
 }

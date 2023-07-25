@@ -34,7 +34,7 @@
 import AnswerInfor from '@/components/AnswerInfor.vue'
 import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-
+import {useRoute} from "vue-router";
 export default {
     name: 'QApage',
     components: {
@@ -48,21 +48,40 @@ export default {
     },
     created() {
 
-        // let url = '/api/term/getAllTermName';
-        // this.$ajax.get(url, {
-        //         params: {
-                   
-        //         }
-        //     })
-        //     .then(response => {
-        //         var list = []
-        //         for(var i in response.data) {
-        //           list.push({id:(parseInt(i) + 1), name: response.data[i]})
-        //         }
-        //         this.tableData = list
-        //     })
-        //     .catch(err => console.log("[error]" + err));
-    
+        const route = useRoute();
+        const _content = route.params.content;
+        const _type = route.params.type;
+        // console.log("参数接收到了！！", _content)
+        this.input = _content
+        let url = '/api/term/selectByName';
+        this.$ajax.get(url, {
+                params: {
+                    name: this.input
+                }
+            })
+            .then(response => {
+                if(response.data.length !== 0) {
+                    var list = []
+                    list.push({id: 1, name: response.data[0]['startTerm'].name})
+                    for(var i in response.data) {
+                      list.push({id:(parseInt(i) + 2), name: response.data[i]['endTerm'].name})
+                    }
+                    this.tableData = list
+                }else {
+                     this.$alert('抱歉！暂无此术语查询！', '提示', {
+                        confirmButtonText: '确定',
+                        type: 'warning'
+                    }).then(() => {
+                      this.input = ''
+                      this.tableData = ''
+                        // 点击确定进行的操作
+                        this.$router.go(-1)
+                    })
+                }
+                
+            })
+            .catch(err => console.log("[error]" + err));
+
     },
     methods: {
       search() {
