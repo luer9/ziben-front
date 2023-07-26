@@ -9,6 +9,7 @@ import DocumentPage from '@/views/DocumentPage.vue'
 import PdfPage from '@/views/PDFView.vue'
 import allTerm from '@/views/TermAllPage.vue'
 import allTermSearch from '@/views/TermAllPagesSearch.vue'
+import approxTerms from '@/views/ApproxTerms.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -42,6 +43,11 @@ const routes: Array<RouteRecordRaw> = [
     path:'/vagueTerm',
     name:'vagueTerm',
     component: QApage
+  },
+  {
+    path:'/approxTerms',
+    name:'approxTerms',
+    component: approxTerms
   },
   {
     path:'/allTerm',

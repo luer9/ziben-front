@@ -16,9 +16,9 @@
               &nbsp;
               <el-button plain @click="search"> 查询 </el-button>     
             </div>
-            <div style="width: 80%; margin: 0 auto;" id="tips">
+            <!-- <div style="width: 80%; margin: 0 auto;" id="tips">
             功能提示：输入相关术语词，将出现相关术语。
-          </div>
+          </div> -->
           </div>
           <div style="width: 80%; margin: 0 auto;">
             <AnswerInfor v-bind:tableData='tableData'  />
@@ -75,7 +75,7 @@ export default {
                       this.input = ''
                       this.tableData = ''
                         // 点击确定进行的操作
-                        this.$router.go(-1)
+                      this.$router.go(-1)
                     })
                 }
                 

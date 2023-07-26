@@ -106,7 +106,7 @@ export default {
         )
       }else if(this.input3 != '' && this.tableData.indexOf(this.input3) ==-1) {
         this.$router.push(
-        { name: "vagueTerm", params: { content: this.input3}}
+        { name: "approxTerms", params: { content: this.input3, type: "1"}}
         )
       }
       // if(this.input3.value != '') {

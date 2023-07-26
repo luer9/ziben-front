@@ -831,7 +831,9 @@ export default {
 svg {
   /* border-radius: 5px; */
 }
-
+text{
+  cursor: pointer;
+}
 .element {
   transition: opacity 0.5s ease;
 }

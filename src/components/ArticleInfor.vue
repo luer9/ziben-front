@@ -159,6 +159,8 @@ export default defineComponent({
       curNode:  "",
       preNode: [],
       isShow: false,
+      aproNode: "",
+      type: ""
     }
   },
   onMounted() {
@@ -189,7 +191,15 @@ export default defineComponent({
     // this.coreNode = this.articleInfor
       const route = useRoute();
       const _content = route.params.content;
+      const _cur = route.params.curTerm;
+      const _type = route.params.type;
       const _this = this
+      //  console.log("参数接收到>atchxzzzzz> ", _content, " ", _cur, "... " , _type)
+      if(_cur != undefined && _type == "1") {
+        this.preNode.push(_cur)
+        this.aproNode = _cur
+        this.type = _type
+      }
       let url = "/api/term/selectByName"
       //   //  let url =
       //   //     process.env.NODE_ENV === "production"
@@ -412,17 +422,25 @@ export default defineComponent({
       if(this.preNode != "") {
         
         var preName = this.preNode.pop()
-        this.$ajax.get('/api/term/selectByName', {
-          params: {
-            name: preName
-          }
-        }).then((data) => {
-          if (data.data.length !== 0) {             
-              this.returnUpdate(data)
-          } else {
-  
-          }
-        })
+        // console.log(">>> " , this.type)
+        if(preName == this.aproNode) {
+          this.$router.push(
+            { name: "approxTerms", params: { content: this.aproNode, type: this.type}}
+          )
+        }else {
+            this.$ajax.get('/api/term/selectByName', {
+              params: {
+                name: preName
+              }
+            }).then((data) => {
+              if (data.data.length !== 0) {             
+                  this.returnUpdate(data)
+              } else {
+      
+              }
+            })
+        }
+        
         
       }else {
         // this.isShow = true

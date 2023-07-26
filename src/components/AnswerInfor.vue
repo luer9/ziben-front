@@ -26,6 +26,7 @@
 <script lang="ts"  >
 import { alertProps } from 'element-plus/lib/components'
 import { useRouter } from 'vue-router'
+import {useRoute} from "vue-router";
 export default {
     name: 'AnswerInfor',
     components: {
@@ -42,55 +43,30 @@ export default {
       }
     },
     methods: {
-      search() {
-        let url = '/api/term/selectByName';
-        // let params = {
-        //   name: this._input
-        // }
-        // this.$ajax.get(url, {
-        //         params: {
-        //             name: _content
-        //         }
-        //     })
-        //     .then(response => {
-        //         if(response.data.length !== 0) {
-        //             // console.log(">>>>> " + response.data)
-        //             // 这里需要转换一下数据
-        //             const dataSet = this.dataFormat(response.data)
-
-        //             this.originNodes = dataSet.coreNode; //核心
-        //             this.smNodes = dataSet.smNodes;
-        //             this.d3jsonParser(response)
-        //             this.articleInfor = dataSet.coreNode;
-        //             this.article = this.articleInfor
-        //         //    console.log(">>>> " + this.data.nodeList)
-        //         }else {
-        //              this.$alert('抱歉！暂无此术语查询！', '提示', {
-        //                 confirmButtonText: '确定',
-        //                 type: 'warning'
-        //             }).then(() => {
-        //                 // 点击确定进行的操作
-        //                 this.$router.go(-1)
-        //             })
-        //         }
-                
-        //     })
-        //     .catch(err => console.log("[error]" + err));
-      }
+   
     },
     created() {  
+      // const route = useRoute();
+      // const _content = route.params.content;
+      // const _type = route.params.type;
+      //   // 没有参数 跳转 别的页面
+      // console.log("参数接收到了！！", _content)
        
     },
     computed: {
     },
     setup() {
+      // console.log("参数接收到了》〉》", useRoute().params.content)
+      const  curterm = useRoute().params.content
+      const  _type = useRoute().params.type
       const _router = useRouter();
       const handle = (row: any) => {
         _router.push({
             name: "infor",
             params: {
               content: row.name,
-              // type: select.value
+              curTerm: curterm,
+              type: _type
             }
         })     
       }

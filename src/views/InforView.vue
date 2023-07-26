@@ -46,9 +46,9 @@ export default {
     created() {
         const route = useRoute();
         const _content = route.params.content;
-        const _type = route.params.type;
+        const _cur = route.params.curTerm;
         // 没有参数 跳转 别的页面
-        // console.log("参数接收到了！！", _content)
+        // console.log("参数接收到>11> ", _content, " ", _cur)
         // this.article = this.articleInfor
 
         // let url =
@@ -58,13 +58,6 @@ export default {
         if(_content == undefined || _content == '') {
              this.$router.push('/allTermSearch')
           
-            // this.$alert('术语空', '提示', {
-            //                 confirmButtonText: '确定',
-            //                 type: 'warning'
-            //             }).then(() => {
-            //                 // 点击确定进行的操作
-            //                 this.$router.go(-1)
-            // })
         }else {
             let url = '/api/term/selectByName';
             this.$ajax.get(url, {

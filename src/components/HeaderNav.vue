@@ -71,14 +71,9 @@
   </el-menu>
   </el-affix>
 </template>
-<script lang="ts">
+<script>
 import {User} from '@element-plus/icons-vue'
 import { ref } from 'vue'
-
-// const activeIndex = ref('5')
-// const handleSelect = (key: string, keyPath: string[]) => {
-//   // console.log(key, keyPath)
-// }
 export default {
   name: "Nav",
   data() {
@@ -86,15 +81,18 @@ export default {
       activeIndex: "/"
     }
   },
-  // computed: {
-  //   acticeIndex: function() {
-  //     return this.$route.path;
-  //   }
-  // },
+  computed: {
+    activeIndex: function() {
+      return this.$route.path;
+    }
+  },
   created() {
     
   },
   watch:{
+    activeIndex() {
+      return this.$route.path;
+    },
     $route() {
       // console.log(">>>" + this.$route.path)
       this.handleSelect(this.$route.path);
@@ -103,7 +101,8 @@ export default {
   methods: {
     handleSelect(keyPath) {
       this.activeIndex = keyPath
-    }
+        // this.$router.push(keyPath);
+    },
   }
 }
 </script>
