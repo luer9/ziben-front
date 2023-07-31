@@ -10,6 +10,7 @@ import PdfPage from '@/views/PDFView.vue'
 import allTerm from '@/views/TermAllPage.vue'
 import allTermSearch from '@/views/TermAllPagesSearch.vue'
 import approxTerms from '@/views/ApproxTerms.vue'
+import Manual from '@/views/Manual.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -73,6 +74,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/introduction',
     name: 'introduction',
     component: DocumentPage
+  },
+  {
+    path: '/manual',
+    name: 'manual',
+    component: Manual
   },
   {
     path: '/pdfPage',

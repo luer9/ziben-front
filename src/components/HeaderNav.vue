@@ -11,7 +11,9 @@
   
       
   
-   
+   <el-menu-item index="/manual" > 
+      <router-link to="/manual"> <strong>使用手册</strong> </router-link>
+  </el-menu-item>
   <el-menu-item index="/vagueTerm" > 
       <router-link to="/vagueTerm"> <strong>术语模糊搜索</strong> </router-link>
       </el-menu-item>

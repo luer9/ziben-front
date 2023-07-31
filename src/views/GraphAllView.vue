@@ -166,12 +166,12 @@ export default {
       this.curNode = this.data.nodeList[0].name
  
     },
-     // 对文本特殊标题加粗。
-    modifyText(msg) {
+     modifyText(msg) {
         // console.log(">>>>?? " + " > " + msg.indexOf("释义") + msg.substring(0, msg.indexOf("释义")))
         var lis = ['外译方案：','外译方案:', '译文来源：', '译文来源:']
+        msg = msg.substring(msg.indexOf("外译方案"), msg.length)
+        // console.log(">>>> " + msg)
         // msg = msg.replaceAll('　　', '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
-       
         msg = msg.replace("外译方案：", '<span style="font-weight:900;font-style: bold;"> 外译方案：</span><br>')
         msg = msg.replace("译文来源：", '<br><br><span style="font-weight:900;font-style: bold;"> 译文来源：</span><br>')
         msg = msg.replace("译文来源:", '<br><br><span style="font-weight:900;font-style: bold;"> 译文来源:</span><br>')
@@ -180,22 +180,8 @@ export default {
         msg = msg.replace("[4]", '<br>[4]')
         msg = msg.replace("[5]", '<br>[5]')
         msg = msg.replace("[6]", '<br>[6]')
+
         msg = msg.substring(0, msg.indexOf("释义"))
-        // console.log(">>>> " + msg)
-        // for(var i in lis) {
-        //     if(msg.indexOf(lis[i]) != -1) {
-        //     // console.log("---> ", lis[i])
-        //         if(lis[i] == '外译方案：')
-        //             msg = msg.replace(lis[i], '<span style="font-weight:900;font-style: bold;">'+ lis[i] +'</span>')
-        //         // else if(lis[i] == '释义:' || lis[i] == '释义：'){
-        //         //     msg = msg.replace(lis[i], '<span style="font-weight:900;font-style: italic;">'+ '<br>' + lis[i] + '<br>' +'</span>')
-        //         // }
-        //         else {
-        //             msg = msg.replace(lis[i], '<span style="font-weight:900;font-style: bold;">'+ '<br>' + lis[i] +'</span>')
-        //         }
-        //     }
-            
-        // }
         return msg
     },
      // 解析json数据，主要负责数据的去重、标准化
@@ -248,7 +234,7 @@ export default {
               label: 'term',
               flag: item.startTerm.flag,
               name: item.startTerm.name,
-              interpret:  this.modifyText(item.startTerm.interpret.slice(item.startTerm.name.length)) 
+              interpret:  this.modifyText(item.startTerm.interpret) 
               
             })
           }
@@ -259,7 +245,7 @@ export default {
               label: 'term',
               flag: item.endTerm.flag,
               name: item.endTerm.name,
-              interpret: this.modifyText(item.endTerm.interpret.slice(item.endTerm.name.length))
+              interpret: this.modifyText(item.endTerm.interpret)
             })
           }
           links.push({
